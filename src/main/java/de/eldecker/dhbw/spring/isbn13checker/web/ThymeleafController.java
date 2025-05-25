@@ -22,6 +22,15 @@ import org.springframework.stereotype.Controller;
  * <li>https://www.baeldung.com/spring-boot-internationalization</li>
  * <li>https://howtodoinjava.com/spring-boot/rest-i18n-example/</li>
  * </ul>
+ * <br><br>
+ * 
+ * Spracheinstellung von Browser abfragen:
+ * In JavaScript-Konsole {@code navigator.languages} eingeben. 
+ * Damit wird ein Array zurückgeliefert, der die Sprachen in der im Browser
+ * einstellten Reihenfolge zurückliefert, z.B.:
+ * <pre>
+ * ['en-US', 'de-DE', 'de', 'en']
+ * </pre>
  */
 @Controller
 @RequestMapping( "/app/" )
