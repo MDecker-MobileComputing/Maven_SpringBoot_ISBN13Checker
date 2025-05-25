@@ -23,8 +23,8 @@ jobs:
     - name: FatJar-Datei veröffentlichen
       uses: actions/upload-artifact@v4
       with:
-        name: Glossar_FatJar
-        path: target/isnb13checker-*-SNAPSHOT.jar
+        name: Isbn13Checker_FatJar
+        path: target/isbn13checker-*-SNAPSHOT.jar
         if-no-files-found: error
         retention-days: 3
 
