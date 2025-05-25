@@ -42,10 +42,11 @@ public class ThymeleafController {
         _isbn13Check = isbn13Check;
     }
         
+    
     /**
      * Controller-Methode für die Anzeige des Formulars zur Eingabe der ISBN-13.
      * 
-     * @param model Model-Objekt für die View
+     * @param model Model-Objekt für Übergabe Werte für Platzhalterwerte
      * 
      * @return Immer "formular" als View-Name für "formular.html"
      */
@@ -56,9 +57,31 @@ public class ThymeleafController {
     }
     
     
+    /**
+     * Ergebnis der Überprüfung anzeigen.
+     * 
+     * @param model Model-Objekt für Übergabe Werte für Platzhalterwerte
+     * 
+     * @param isbn13 Von Nutzer in Formular eingegebene ISBN13, die überprüft
+     *               werden soll
+     * 
+     * @return Immer "ergebnis" als View-Name für "ergebnis.html"
+     */
     @GetMapping( "/ueberpruefen" )
     public String ergebnis( Model model,
                             @RequestParam( name = "isbn13", required = true ) String isbn13 ) {
+    
+        isbn13 = isbn13.trim();
+        
+        final boolean istOkay = _isbn13Check.isbn13Pruefziffer13IstKorrekt( isbn13 );
+        
+        final String ergebnis = 
+                String.format( "Die ISBN %s ist %s.", 
+                               isbn13, 
+                               istOkay ? "gültig" : "ungültig"  
+                             );
+        
+        model.addAttribute( "ergebnis" , ergebnis );
         
         return "ergebnis";
     }
