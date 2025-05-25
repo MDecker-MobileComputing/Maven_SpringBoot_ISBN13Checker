@@ -38,7 +38,7 @@ public class ThymeleafController {
 
     
     /**
-     * Service-Bean für die ISBN-13-Prüfung.
+     * Service-Bean für die ISBN13-Prüfung.
      */
     private ISBN13Check _isbn13Check;
     
@@ -58,13 +58,13 @@ public class ThymeleafController {
      */
     private void sprache2logger() {
         
-        Locale currentLocale = LocaleContextHolder.getLocale();
-        LOG.info( "Aktuelle Sprache: {}", currentLocale);
+        Locale aktuelleSprache = LocaleContextHolder.getLocale();
+        LOG.info( "Aktuelle Sprache: {}", aktuelleSprache );
     }
         
     
     /**
-     * Controller-Methode für die Anzeige des Formulars zur Eingabe der ISBN-13.
+     * Controller-Methode für die Anzeige des Formulars zur Eingabe der ISBN13.
      * 
      * @param model Model-Objekt für Übergabe Werte für Platzhalterwerte
      * 
@@ -99,11 +99,10 @@ public class ThymeleafController {
         
         final boolean istOkay = _isbn13Check.isbn13Pruefziffer13IstKorrekt( isbn13 );
         
-        final String ergebnis = 
-                            String.format( "Die ISBN %s ist %s.", 
-                                           isbn13, 
-                                           istOkay ? "gültig" : "ungültig"  
-                                         );
+        final String ergebnis = String.format( "Die ISBN %s ist %s.",                              
+                                               isbn13, 
+                                               istOkay ? "gültig" : "ungültig"  
+                                             );
         
         model.addAttribute( "ergebnis" , ergebnis );
         
