@@ -14,6 +14,7 @@ import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 
@@ -41,15 +42,22 @@ public class ThymeleafController {
      * Service-Bean für die ISBN13-Prüfung.
      */
     private ISBN13Check _isbn13Check;
+
+    /**
+     * Bean für Zugriff auf i18n-Texte.
+     */
+    private MessageSource _messageSource;
     
     
     /**
      * Konstruktor für Dependency Injection.
      */
     @Autowired
-    public ThymeleafController( ISBN13Check isbn13Check ) {
+    public ThymeleafController( ISBN13Check isbn13Check, 
+                                MessageSource messageSource ) {
         
-        _isbn13Check = isbn13Check;
+        _isbn13Check   = isbn13Check;
+        _messageSource = messageSource;
     }
     
     
@@ -99,10 +107,10 @@ public class ThymeleafController {
         
         final boolean istOkay = _isbn13Check.isbn13Pruefziffer13IstKorrekt( isbn13 );
         
-        final String ergebnis = String.format( "Die ISBN %s ist %s.",                              
-                                               isbn13, 
-                                               istOkay ? "gültig" : "ungültig"  
-                                             );
+        final Locale aktuelleSprache = LocaleContextHolder.getLocale();
+        final String messageKey = istOkay ? "ergebnis.gueltig" : "ergebnis.ungueltig";
+        final Object[] messageArgs = { isbn13 };        
+        final String ergebnis = _messageSource.getMessage(messageKey, messageArgs, aktuelleSprache);
         
         model.addAttribute( "ergebnis" , ergebnis );
         
