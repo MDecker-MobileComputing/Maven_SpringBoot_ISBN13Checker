@@ -9,19 +9,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import de.eldecker.dhbw.spring.isbn13checker.logik.ISBN13Check;
 
+import java.util.Locale;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 
 
 /**
  * Thymeleaf-Controller mit i18n.
- * <br><br>
- * 
- * i18n mit Thymeleaf in einer Spring-Boot-Anwendung:
- * <ul>
- * <li>https://www.baeldung.com/spring-boot-internationalization</li>
- * <li>https://howtodoinjava.com/spring-boot/rest-i18n-example/</li>
- * </ul>
  * <br><br>
  * 
  * Spracheinstellung von Browser abfragen:
@@ -35,7 +33,10 @@ import org.springframework.stereotype.Controller;
 @Controller
 @RequestMapping( "/app/" )
 public class ThymeleafController {
+    
+    private final static Logger LOG = LoggerFactory.getLogger( ThymeleafController.class );
 
+    
     /**
      * Service-Bean für die ISBN-13-Prüfung.
      */
@@ -50,6 +51,16 @@ public class ThymeleafController {
         
         _isbn13Check = isbn13Check;
     }
+    
+    
+    /**
+     * Schreibt aktuelle Sprache auf den Logger.
+     */
+    private void sprache2logger() {
+        
+        Locale currentLocale = LocaleContextHolder.getLocale();
+        LOG.info( "Aktuelle Sprache: {}", currentLocale);
+    }
         
     
     /**
@@ -61,6 +72,8 @@ public class ThymeleafController {
      */
     @GetMapping( "/formular" )
     public String formular( Model model ) {
+        
+        sprache2logger();
         
         return "formular";
     }
@@ -80,15 +93,17 @@ public class ThymeleafController {
     public String ergebnis( Model model,
                             @RequestParam( name = "isbn13", required = true ) String isbn13 ) {
     
+        sprache2logger();
+        
         isbn13 = isbn13.trim();
         
         final boolean istOkay = _isbn13Check.isbn13Pruefziffer13IstKorrekt( isbn13 );
         
         final String ergebnis = 
-                String.format( "Die ISBN %s ist %s.", 
-                               isbn13, 
-                               istOkay ? "gültig" : "ungültig"  
-                             );
+                            String.format( "Die ISBN %s ist %s.", 
+                                           isbn13, 
+                                           istOkay ? "gültig" : "ungültig"  
+                                         );
         
         model.addAttribute( "ergebnis" , ergebnis );
         
