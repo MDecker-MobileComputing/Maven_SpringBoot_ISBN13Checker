@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ISBN13-Checker</title>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../isbn13-style.css">
+</head>
+<body>
+
+    <h1>ISBN13-Checker</h1>
+
+    <form action="/app/ueberpruefen" method="get">
+
+        <label for="isbn">ISBN13:</label>
+        <input type="text" name="isbn13" required>
+
+        <button type="submit">Prüfen</button>
+        <button type="reset" >Zurücksetzen</button>
+    </form>
+
+</body>

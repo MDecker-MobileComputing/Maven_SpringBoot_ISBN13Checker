@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ergebnis ISBN13-Check</title>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../isbn13-style.css">
+</head>
+<body>
+
+    <h1>Ergebnis ISBN13-Check</h1>
+
+    <p>Die ISBN13 <span th:text="${isbn13}"></span> ist ...</p>
+    <br><br>
+    
+    <a href="/app/formular" class="button">Weitere ISBN13 überprüfen</a>
+
+</body>
