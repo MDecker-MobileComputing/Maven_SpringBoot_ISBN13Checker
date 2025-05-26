@@ -107,11 +107,13 @@ public class ThymeleafController {
         
         final boolean istOkay = _isbn13Check.isbn13Pruefziffer13IstKorrekt( isbn13 );
         
-        final Locale aktuelleSprache = LocaleContextHolder.getLocale();
-        final String messageKey = istOkay ? "ergebnis.gueltig" : "ergebnis.ungueltig";
-        final Object[] messageArgs = { isbn13 };        
-        final String ergebnis = _messageSource.getMessage(messageKey, messageArgs, aktuelleSprache);
+        final Locale   aktuelleSprache  = LocaleContextHolder.getLocale();
+        final String   textSchluessel   = istOkay ? "ergebnis.gueltig" : "ergebnis.ungueltig";
+        final Object[] platzhalterWerte = { isbn13 };        
         
+        final String ergebnis = _messageSource.getMessage( textSchluessel, 
+        		                                           platzhalterWerte, 
+        		                                           aktuelleSprache );         		                                                 
         model.addAttribute( "ergebnis" , ergebnis );
         
         return "ergebnis";
