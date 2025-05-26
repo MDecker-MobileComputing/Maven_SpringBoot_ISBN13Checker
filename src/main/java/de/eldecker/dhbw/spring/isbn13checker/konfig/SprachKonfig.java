@@ -58,7 +58,7 @@ public class SprachKonfig implements WebMvcConfigurer  {
      * Sprache wird dann aber nur bei Verwendung von {@code SessionLocaleResolver}
      * für alle anderen Seiten beachtet.
      * 
-     * @return
+     * @return Konfigurierter Interceptor
      */
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
@@ -70,6 +70,12 @@ public class SprachKonfig implements WebMvcConfigurer  {
     }
     
     
+    /**
+     * Methode aus Interface {@code WebMvcConfigurer} überschreiben.
+     * 
+     * @param registry Registry für Interceptoren, dem der {@code LocaleChangeInterceptor}
+     *                 hinzugefügt wird.
+     */
     @Override
     public void addInterceptors( InterceptorRegistry registry ) {
         
