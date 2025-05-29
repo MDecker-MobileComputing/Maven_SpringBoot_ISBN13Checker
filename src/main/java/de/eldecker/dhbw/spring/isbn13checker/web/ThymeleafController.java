@@ -28,7 +28,7 @@ import org.springframework.stereotype.Controller;
  * Damit wird ein Array zurückgeliefert, der die Sprachen in der im Browser
  * einstellten Reihenfolge zurückliefert, z.B.:
  * <pre>
- * ['en-US', 'de-DE', 'de', 'en']
+ * [ 'en-US', 'de-DE', 'de', 'en' ]
  * </pre>
  */
 @Controller

@@ -50,7 +50,7 @@ public class ISBN13Check {
         for ( int i = 0; i < 12; i++ ) {
             
             char zifferAlsChar = ziffernString.charAt( i );
-            int ziffer = Character.getNumericValue( zifferAlsChar );
+            int  ziffer        = Character.getNumericValue( zifferAlsChar );
             if ( i % 2 == 0 ) {
                 
                 summe += ziffer;
