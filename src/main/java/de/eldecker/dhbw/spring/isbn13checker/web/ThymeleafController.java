@@ -74,12 +74,10 @@ public class ThymeleafController {
     /**
      * Controller-Methode für die Anzeige des Formulars zur Eingabe der ISBN13.
      * 
-     * @param model Model-Objekt für Übergabe Werte für Platzhalterwerte
-     * 
      * @return Immer "formular" als View-Name für "formular.html"
      */
     @GetMapping( "/formular" )
-    public String formular( Model model ) {
+    public String formular() {
         
         sprache2logger();
         
@@ -99,8 +97,8 @@ public class ThymeleafController {
      */
     @GetMapping( "/ueberpruefen" )
     public String ergebnis( Model model,
-                            @RequestParam( name = "isbn13", required = true ) String isbn13 ) {
-    
+                            @RequestParam( name     = "isbn13", 
+                                           required = true     ) String isbn13 ) {    
         sprache2logger();
         
         isbn13 = isbn13.trim();
