@@ -5,7 +5,6 @@ import static java.util.Locale.ENGLISH;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
@@ -68,18 +67,5 @@ public class SprachKonfig implements WebMvcConfigurer  {
         
         return lci;
     }
-    
-    
-    /**
-     * Methode aus Interface {@code WebMvcConfigurer} überschreiben.
-     * 
-     * @param registry Registry für Interceptoren, dem der {@code LocaleChangeInterceptor}
-     *                 hinzugefügt wird.
-     */
-    @Override
-    public void addInterceptors( InterceptorRegistry registry ) {
-        
-        registry.addInterceptor( localeChangeInterceptor() );
-    }
-    
+           
 }
